@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import sequelize from "./src/config/database.js";
 import "./src/models/character.model.js"
+import characterRoutes from "./src/routes/character.routes.js";
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send('Api Dragon Ball');
 });
+
+app.use('/api/characters', characterRoutes);
 
 app.listen(PORT, () => {
     console.log(`servidor corriendo en http://localhost:${PORT}`);
