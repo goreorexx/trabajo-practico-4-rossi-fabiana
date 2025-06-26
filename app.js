@@ -22,7 +22,6 @@ app.listen(PORT, () => {
 sequelize.authenticate()
     .then(() => {
         console.log('Conexión a la base de datos exitosa');
-        // Sincroniza los modelos y crea las tablas si no existen
         return sequelize.sync();
     })
     .then(() => {
