@@ -1,4 +1,5 @@
 import characters from "../models/character.model.js";
+import { Op } from 'sequelize';
 
 export const createCharacter = async (req, res) => {
     try {
@@ -7,7 +8,7 @@ export const createCharacter = async (req, res) => {
             return res.status(400).json({ error: "Faltan datos obligatorios. Tal vez Freezer los robó."});
         }
         if (!Number.isInteger(ki)) {
-            return res.status(400).json({ error: "El número ingresado no es válido, Vegetta dice que debe ser un entero."});
+            return res.status(400).json({ error: "El número ingresado en el ki no es válido, Vegetta dice que debe ser un entero."});
         }
         if (gender !== "Male" && gender !== "Female") {
             return res.status(400).json({ error: "Sólo se permite género masculino o femenino."});
@@ -90,7 +91,7 @@ export const deletecharacter = async (req, res) => {
         }
 
         await character.destroy();
-        res.json({ message: "Personaje eliminado con éxito." });
+        res.status(200).json({ message: "Personaje eliminado con éxito." });
     } catch (err) {
         res.status(500).json({ error: "Error al eliminar el personaje" });
     }
